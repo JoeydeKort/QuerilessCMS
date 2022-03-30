@@ -25,4 +25,9 @@ public class UsersControllerImpl implements UsersController {
         return "/error/access-denied";
     }
 
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+
 }
