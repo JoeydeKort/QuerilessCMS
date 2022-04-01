@@ -22,8 +22,13 @@
     <div id="inside-logo">
         <img src="images/QuerilessLogoDark.png" alt="Logo Queriless">
     </div>
-</div>
 
+    <tr th:each="user : ${user}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+    </tr>
+
+</div>
 
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -21,14 +22,24 @@ public class UsersServiceImpl implements UsersService {
 
 
     @Override
-    public List<Users> findAll() {
+    public List<Users> findAllUsers() {
         return usersRepository.findAll();
     }
 
     @Override
-    public void save(Users users) {
+    public void saveUser(Users users) {
         usersRepository.save(users);
+    }
 
+    @Override
+    public Optional<Users> findUserById(Long id) {
+        return usersRepository.findById(id);
+    }
+
+
+    @Override
+    public void deleteById(Long id) {
+        usersRepository.deleteById(id);
     }
 
 }
