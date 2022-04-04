@@ -27,17 +27,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/css/**", "/images/**").permitAll()
-                .anyRequest().authenticated();
-        http
+                .antMatchers("/admin/**").hasAnyRole("ROLE_ADMIN")
+                .antMatchers("/profile/**").hasAnyRole("ROLE_USER")
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/profile")
-                .failureUrl("/login?error")
                 .permitAll()
                 .and()
                 .logout()
-                .invalidateHttpSession(true)
-                .logoutSuccessUrl("/login?logout")
                 .permitAll();
     }
 

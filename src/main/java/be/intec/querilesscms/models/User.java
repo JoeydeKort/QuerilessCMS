@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -36,9 +37,12 @@ public class User {
 
     String zip;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    Collection<Role> role;
+    Set<Role> roles;
 
-
+    @Override
+    public String toString() {
+        return this.getUsername();
+    }
 }

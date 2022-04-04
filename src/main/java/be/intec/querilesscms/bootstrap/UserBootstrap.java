@@ -1,11 +1,15 @@
 package be.intec.querilesscms.bootstrap;
 
+import be.intec.querilesscms.models.Role;
 import be.intec.querilesscms.models.User;
 import be.intec.querilesscms.services.Implementations.UsersServiceImpl;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class UserBootstrap implements ApplicationListener<ContextRefreshedEvent> {
@@ -32,7 +36,17 @@ public class UserBootstrap implements ApplicationListener<ContextRefreshedEvent>
             nikola.setAddress("2nd street 55");
             nikola.setZip("5021TP");
 
+
+            Set<Role> roles = new HashSet<>();
+            roles.add(Role.user());
+            roles.add(Role.admin());
+            roles.add(Role.editor());
+
+            nikola.setRoles(roles);
+
             usersServiceImpl.saveUser(nikola);
+
+
 
         }
 

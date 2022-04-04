@@ -13,10 +13,10 @@
     <a th:href="@{/login}">Home</a>
     <a th:href="@{/profile}">Profile page</a>
     <a th:href="@{/admin}">Administrator page </a>
-    <a th:href="@{/logout}">Logout</a>
+    <span sec:authorize="isAuthenticated()"> | Logged user: <span sec:authentication="name"></span> | Roles:
+        <span sec:authentication="principal.authorities"></span> | <a th:href="@{/logout}">Sign Out</a> </span>
 </div>
 
-<div sec:authentication="name"></div>
 
 <div id="main-container">
     <div id="inside-logo">

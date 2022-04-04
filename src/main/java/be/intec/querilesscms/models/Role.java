@@ -17,13 +17,64 @@ import java.util.List;
 @Entity
 public class Role {
 
+    /*
+    USER
+    EDITOR
+    ADMIN
+    GUEST
+     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String role;
+    String title;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "role")
-    List<User> user;
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    Role parent;
 
+    public Role(String title) {
+        this.title = title;
+    }
+
+    public static Role user(){
+
+        return new Role("ROLE_USER");
+    }
+
+    public static Role editor(){
+
+        return new Role("ROLE_EDITOR");
+    }
+
+    public static Role admin(){
+
+        return new Role("ROLE_ADMIN");
+    }
+
+    public static Role guest(){
+
+        return new Role("ROLE_GUEST");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Role)) return false;
+
+        Role role = (Role) o;
+
+        return getTitle().equals(role.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return getTitle().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return this.getTitle();
+    }
 }

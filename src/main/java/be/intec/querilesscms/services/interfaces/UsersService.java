@@ -1,5 +1,6 @@
 package be.intec.querilesscms.services.interfaces;
 
+import be.intec.querilesscms.models.Role;
 import be.intec.querilesscms.models.User;
 
 import java.util.List;
@@ -16,4 +17,9 @@ public interface UsersService {
     User findByUserName(String userName);
 
     void deleteById(Long id);
+
+    void addRole(User user, Role role);
+
+    void removeRole(User user, Role role);
+
 }
