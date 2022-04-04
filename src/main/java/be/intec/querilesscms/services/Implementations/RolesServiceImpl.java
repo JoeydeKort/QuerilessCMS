@@ -1,6 +1,6 @@
 package be.intec.querilesscms.services.Implementations;
 
-import be.intec.querilesscms.repositories.RolesRepository;
+import be.intec.querilesscms.repositories.RoleRepository;
 import be.intec.querilesscms.services.interfaces.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class RolesServiceImpl implements RolesService {
 
-    private RolesRepository rolesRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
-    public RolesServiceImpl(RolesRepository rolesRepository) {
-        this.rolesRepository = rolesRepository;
+    public RolesServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
 }

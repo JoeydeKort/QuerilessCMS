@@ -1,6 +1,5 @@
 package be.intec.querilesscms.models;
 
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +14,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @Data
 @Entity
-public class Brewers {
+public class Brewer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,14 +32,14 @@ public class Brewers {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    Users user;
+    User users;
 
     @ManyToOne
     @JoinColumn(name = "beer_id")
-    Beers beer;
+    Beer beers;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "Brewer_category", joinColumns = @JoinColumn(name = "brewer_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    Collection<Categories> category;
+    Collection<Category> category;
 
 }

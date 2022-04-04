@@ -1,10 +1,9 @@
 package be.intec.querilesscms.repositories;
 
-import be.intec.querilesscms.models.Users;
+import be.intec.querilesscms.models.Beer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsersRepository extends JpaRepository<Users,Long> {
-
+public interface BeerRepository extends JpaRepository<Beer, Long> {
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-public class Categories {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +26,9 @@ public class Categories {
 
     @ManyToOne
     @JoinColumn(name = "beer_id")
-    Beers beer;
+    Beer beer;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    List<Brewers> brewers;
+    List<Brewer> brewer;
 
 }

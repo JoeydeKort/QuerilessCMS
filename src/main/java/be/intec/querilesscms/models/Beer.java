@@ -1,29 +1,37 @@
 package be.intec.querilesscms.models;
 
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-public class Roles {
+public class Beer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String role;
+    String name;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "roles")
-    List<Users> users;
+    Double price;
+
+    Long stock;
+
+    Double alcohol;
+
+    Long brewer_id;
+
+    Long category_id;
 
 }

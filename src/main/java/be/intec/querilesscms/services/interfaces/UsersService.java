@@ -1,17 +1,19 @@
 package be.intec.querilesscms.services.interfaces;
 
-import be.intec.querilesscms.models.Users;
+import be.intec.querilesscms.models.User;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UsersService {
 
-    List<Users> findAllUsers();
+    List<User> findAllUsers();
 
-    void saveUser(Users users);
+    void saveUser(User user);
 
-    Optional<Users> findUserById(Long id);
+    Optional<User> findUserById(Long id);
+
+    User findByUserName(String userName);
 
     void deleteById(Long id);
 }

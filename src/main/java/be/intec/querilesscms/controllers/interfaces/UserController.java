@@ -1,4 +1,4 @@
 package be.intec.querilesscms.controllers.interfaces;
 
-public interface UsersController {
+public interface UserController {
 }
