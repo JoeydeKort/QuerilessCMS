@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UsersServiceImpl implements UsersService, UserDetailsService {
@@ -30,15 +31,8 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
         return userRepository.findAll();
     }
 
-    @Override
-    public void saveUser(User user) {
-        user.setPassCode(encoder.encode(user.getPassCode()));
-
-        if(user.getRoles() != null && user.getRoles().isEmpty()) {
-            user.setRoles(Set.of(Role.user()));
-        }
-
-        userRepository.save(user);
+    public User findByUserName(String userName) {
+        return userRepository.findByUsername(userName);
     }
 
     @Override
@@ -49,6 +43,17 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveUser(User user) {
+        user.setPassCode(encoder.encode(user.getPassCode()));
+
+        if(user.getRoles() != null && user.getRoles().isEmpty()) {
+            user.setRoles(Set.of(Role.user()));
+        }
+
+        userRepository.save(user);
     }
 
     @Override
@@ -69,12 +74,9 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
 
     }
 
-    public User findByUserName(String userName) {
-        return userRepository.findByUsername(userName);
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) {
+
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
@@ -83,22 +85,30 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
         Set<Role> roles = new HashSet<Role>();
 
         if(user.getRoles() != null && !user.getRoles().isEmpty()) {
+
             roles.addAll(user.getRoles());
+
         } else {
             roles.add(Role.guest());
+
         }
+
         List<GrantedAuthority> gaList = new ArrayList<>();
 
         for(Role role : roles) {
             gaList.add(new GrantedAuthority() {
+
                 @Override
                 public String getAuthority() {
                     return "ROLE_" + role.getTitle();
                 }
+
             });
+
         }
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassCode(), gaList);
+
     }
 
 }

@@ -8,7 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 
@@ -17,7 +18,6 @@ import javax.servlet.http.HttpSession;
 public class UserControllerImpl implements UserController {
 
     private final UsersService usersService;
-
 
     public UserControllerImpl(UsersService usersService) {
         this.usersService = usersService;
@@ -46,14 +46,18 @@ public class UserControllerImpl implements UserController {
         return "profile";
     }
 
+    @RequestMapping ("delete/{id}")
+    public String deleteProfile(@PathVariable Long id){
+
+        usersService.deleteById(id);
+
+        return "redirect:/login";
+
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
-    }
-
-    @GetMapping("/access-denied")
-    public String accessDenied() {
-        return "/error/access-denied";
     }
 
     @GetMapping("/admin")

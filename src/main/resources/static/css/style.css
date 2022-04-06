@@ -57,6 +57,22 @@ body {
     background-color: #24f316;
     color: #0d0d0d;
 }
+.pill-red-button a {
+    background-color: darkred;
+    display: inline-block;
+    color: #0d0d0d;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 17px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.pill-red-button a:hover {
+    background-color: red;
+    color: #0d0d0d;
+}
 
 img {
     width: 40%;
@@ -74,7 +90,6 @@ img {
 
 #inside-logo {
     padding: 50px;
-    margin-bottom: 20px;
 }
 
 .container-form {
@@ -83,4 +98,13 @@ img {
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 18px;
+}
+
+#profileList {
+    padding-bottom: 20px;
+}
+
+td, tr {
+    border-bottom: 1px solid #24f316;
+    padding: 10px;
 }

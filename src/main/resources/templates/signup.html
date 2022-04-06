@@ -10,11 +10,12 @@
 <body>
 
 <div class="pill-nav">
-    <a th:href="@{/login}">Home</a>
+    <span sec:authorize="isAuthenticated()"> | Logged user: <span sec:authentication="name"></span>
+        | <a th:href="@{/logout}">Sign Out</a> </span>
+
     <a th:href="@{/profile}">Profile page</a>
+
     <a th:href="@{/admin}">Administrator page </a>
-    <span sec:authorize="isAuthenticated()"> | Logged user: <span sec:authentication="name"></span> | Roles:
-        <span sec:authentication="principal.authorities"></span> | <a th:href="@{/logout}">Sign Out</a> </span>
 </div>
 
 

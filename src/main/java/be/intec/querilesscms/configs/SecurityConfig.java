@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
+ @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     BCryptPasswordEncoder passwordEncoder;
@@ -26,9 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/", "/css/**", "/images/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ROLE_ADMIN")
-                .antMatchers("/profile/**").hasAnyRole("ROLE_USER")
+                .antMatchers("/profile/**").hasAnyRole("ROLE_USER", "ROLE_ADMIN", "ROLE_EDITOR")
+                .antMatchers("/", "/signup", "/css/**", "/images/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

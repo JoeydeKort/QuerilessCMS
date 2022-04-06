@@ -9,16 +9,6 @@
 </head>
 <body>
 
-<div class="pill-nav">
-    <a th:href="@{/login}" >Home</a>
-    <a th:href="@{/profile}">Profile page</a>
-    <a th:href="@{/admin}">Administrator page </a>
-    <span sec:authorize="isAuthenticated()"> | Logged user: <span sec:authentication="name"></span> | Roles:
-        <span sec:authentication="principal.authorities"></span> | <a th:href="@{/logout}">Sign Out</a> </span>
-</div>
-
-
-
 <div id="main-container">
 
     <div id="inside-logo">
@@ -65,9 +55,10 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <p>Don't have account? <button th:href="@{/signup}" id="signup">Sign up here</button></p>
+            </div>
         </form>
-
-        <button th:href="@{/signup}" id="signup">Sign Up</button>
     </div>
 </div>
 
