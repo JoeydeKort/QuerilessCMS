@@ -13,31 +13,20 @@
     <span sec:authorize="isAuthenticated()"> | Logged user: <span sec:authentication="name"></span>
         | <a th:href="@{/logout}">Sign Out</a> </span>
 
+    <a th:href="@{/profile}">Profile page</a>
+
     <a th:href="@{/admin}">Administrator page </a>
 
     <a th:href="@{/dbmenu}">Database menu </a>
 </div>
+
 
 <div id="main-container">
     <div id="inside-logo">
         <img src="images/QuerilessLogoDark.png" alt="Logo Queriless">
     </div>
 
-    <h3>Username: [[${#request.remoteUser}]] </h3>
-    <table id="profileList">
-        <tr>
-            <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
-        </tr>
-        <tr>
-            <td th:text="${user.email}"></td>
-        </tr>
-        <tr>
-            <td th:text="${user.address + ' ' + user.city + ' ' + user.zip}"></td>
-        </tr>
-    </table>
-    <div class="pill-red-button">
-        <a th:href="@{delete/{id}(id=${user.id})}">Delete profile</a>
-    </div>
+    <h2 id="error-message">Forbidden: You don't have the authority to access this page.</h2>
 
 </div>
 

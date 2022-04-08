@@ -100,11 +100,11 @@ img {
     font-size: 18px;
 }
 
-#profileList {
-    padding-bottom: 20px;
-}
-
 td, tr {
     border-bottom: 1px solid #24f316;
     padding: 10px;
+}
+
+#error-message {
+    margin-bottom: 25px;
 }
