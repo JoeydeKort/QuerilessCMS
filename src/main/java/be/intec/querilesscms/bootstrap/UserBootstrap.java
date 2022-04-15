@@ -71,7 +71,7 @@ public class UserBootstrap implements ApplicationListener<ContextRefreshedEvent>
             marie.setZip("1240");
 
             Set<Role> roles2 = new HashSet<>();
-            roles1.add(Role.editor());
+            roles2.add(Role.editor());
 
             marie.setRoles(roles2);
 

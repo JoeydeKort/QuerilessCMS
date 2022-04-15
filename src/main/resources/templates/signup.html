@@ -11,13 +11,13 @@
 
 <div class="pill-nav">
     <span sec:authorize="isAuthenticated()"> | Logged user: <span sec:authentication="name"></span>
-        | <a th:href="@{/logout}">Sign Out</a> </span>
+        | <a th:href="@{/logout}">Sign Out</a>
 
     <a th:href="@{/profile}">Profile page</a>
 
     <a th:href="@{/admin}">Administrator page </a>
 
-    <a th:href="@{/dbmenu}">Database menu </a>
+    <a th:href="@{/dbmenu}">Database menu </a></span>
 </div>
 
 
@@ -25,9 +25,81 @@
     <div id="inside-logo">
         <img src="images/QuerilessLogoDark.png" alt="Logo Queriless">
     </div>
+    <h1>Registration</h1>
+    <form action="/signup" th:object="${user}" method="POST" enctype="utf8">
+        <table>
+            <tr>
+                <td><label>firstname </label></td>
+                <td><label>
+                    <input th:field="*{firstName}"/>
+                </label>
+                    <p th:each="error: ${#fields.errors('firstName')}"
+                       th:text="${error}">Validation error</p></td>
+            </tr>
+            <tr>
+                <td><label>lastname</label></td>
+                <td><label>
+                    <input th:field="*{lastName}"/>
+                </label>
+                    <p th:each="error : ${#fields.errors('lastName')}"
+                       th:text="${error}">Validation error</p></td>
+            </tr>
+            <tr>
+                <td><label>email</label></td>
+                <td><label>
+                    <input type="email" th:field="*{email}"/>
+                </label>
+                    <p th:each="error : ${#fields.errors('email')}"
+                       th:text="${error}">Validation error</p></td>
+            </tr>
+            <tr>
+                <td><label>street and house number</label></td>
+                <td><label>
+                    <input th:field="*{address}"/>
+                </label>
+                    <p th:each="error : ${#fields.errors('address')}"
+                       th:text="${error}">Validation error</p></td>
+            </tr>
+            <tr>
+                <td><label>city</label></td>
+                <td><label>
+                    <input  th:field="*{city}"/>
+                </label>
+                    <p th:each="error : ${#fields.errors('city')}"
+                       th:text="${error}">Validation error</p></td>
+            </tr>
+            <tr>
+                <td><label>zip</label></td>
+                <td><label>
+                    <input  th:field="*{zip}"/>
+                </label>
+                    <p th:each="error : ${#fields.errors('zip')}"
+                       th:text="${error}">Validation error</p></td>
+            </tr>
+            <tr>
+                <td><label>username</label></td>
+                <td><label>
+                    <input th:field="*{username}"/>
+                </label>
+                    <p th:each="error : ${#fields.errors('username')}"
+                       th:text="${error}">Validation error</p></td>
+            </tr>
+            <tr>
+                <td><label>password</label></td>
+                <td><label>
+                    <input type="password" th:field="*{passCode}"/>
+                </label>
+                    <p th:each="error : ${#fields.errors('passCode')}"
+                       th:text="${error}">Validation error</p></td>
+            </tr>
+            <tr>
+                <td><button class="submit" type="submit">submit</button></td>
+                <td><a class="submit" th:href="@{/login}">login</a></td>
+            </tr>
+        </table>
+    </form>
 
 </div>
-
 
 </body>
 </html>

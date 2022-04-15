@@ -40,8 +40,8 @@ body {
 }
 /* end background */
 
-
-.pill-nav a {
+/* Buttons */
+.pill-nav  a {
     background-color: #0b6005;
     display: inline-block;
     color: #0d0d0d;
@@ -51,12 +51,34 @@ body {
     font-size: 17px;
     border-radius: 5px;
     margin: 10px;
+    border: 2px solid darkslategray;
+    box-shadow: 0 0 15px darkslategray;
 }
 
 .pill-nav a:hover {
     background-color: #24f316;
     color: #0d0d0d;
 }
+
+.submit {
+    background-color: #0b6005;
+    display: inline-block;
+    color: #0d0d0d;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    font-size: 17px;
+    border-radius: 5px;
+    margin: 10px;
+    border: 2px solid darkslategray;
+    box-shadow: 0 0 15px darkslategray;
+}
+
+.submit:hover {
+    background-color: #24f316;
+    color: #0d0d0d;
+}
+
 .pill-red-button a {
     background-color: darkred;
     display: inline-block;
@@ -67,12 +89,54 @@ body {
     font-size: 17px;
     border-radius: 5px;
     margin: 10px;
+    border: 2px solid darkslategray;
+    box-shadow: 0 0 15px darkslategray;
 }
 
 .pill-red-button a:hover {
     background-color: red;
     color: #0d0d0d;
 }
+
+.pill-blue-button a {
+    background-color: darkblue;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 17px;
+    border-radius: 5px;
+    margin: 10px;
+    border: 2px solid darkslategray;
+    box-shadow: 0 0 15px darkslategray;
+}
+
+.pill-blue-button a:hover {
+    background-color: blue;
+    color: white;
+}
+
+#login-submit {
+    background-color: #0b6005;
+    display: inline-block;
+    color: #0d0d0d;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    font-size: 17px;
+    border-radius: 5px;
+    margin: 10px;
+    border: 2px solid darkslategray;
+    box-shadow: 0 0 15px darkslategray;
+}
+
+#login-submit:hover {
+    background-color: #24f316;
+    color: #0d0d0d;
+}
+
+/* end buttons */
 
 img {
     width: 40%;
@@ -98,9 +162,14 @@ img {
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 18px;
+    margin-top: 75px;
 }
 
-td, tr {
+.form-group {
+    margin: 10px;
+}
+
+td {
     border-bottom: 1px solid #24f316;
     padding: 10px;
 }

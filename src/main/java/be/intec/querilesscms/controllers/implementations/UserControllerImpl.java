@@ -2,7 +2,7 @@ package be.intec.querilesscms.controllers.implementations;
 
 import be.intec.querilesscms.controllers.interfaces.UserController;
 import be.intec.querilesscms.models.User;
-import be.intec.querilesscms.services.interfaces.UsersService;
+import be.intec.querilesscms.services.Implementations.UsersServiceImpl;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @Controller
 public class UserControllerImpl implements UserController {
 
-    private final UsersService usersService;
+    private final UsersServiceImpl usersServiceImpl;
 
-    public UserControllerImpl(UsersService usersService) {
-        this.usersService = usersService;
+    public UserControllerImpl(UsersServiceImpl usersServiceImpl) {
+        this.usersServiceImpl = usersServiceImpl;
     }
 
     @GetMapping("/profile")
@@ -36,7 +37,7 @@ public class UserControllerImpl implements UserController {
             username = principal.toString();
         }
 
-        User user = usersService.findByUserName(username);
+        User user = usersServiceImpl.findByUserName(username);
 
         session.setAttribute("user", user);
         model.addAttribute("user", user);
@@ -47,20 +48,29 @@ public class UserControllerImpl implements UserController {
     @RequestMapping ("delete/{id}")
     public String deleteProfile(@PathVariable Long id){
 
-        usersService.deleteById(id);
+        usersServiceImpl.deleteById(id);
 
         return "redirect:/login";
 
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public String login(Principal principal) {
+
+        if (principal != null) {
+            return "redirect:/login";
+        }
+        return "/login";
     }
 
     @GetMapping("/admin")
     public String admin() {
         return "admin";
+    }
+
+    @GetMapping("/dbmenu")
+    public String dbmenu() {
+        return "dbmenu";
     }
 
 }

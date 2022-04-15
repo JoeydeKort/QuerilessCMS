@@ -27,37 +27,20 @@
                     You have been logged out.
                 </div>
             </div>
-            <div class="form-group">
-                <label for="username">Username</label>:
-                <input type="text"
-                       id="username"
-                       name="username"
-                       class="form-control"
-                       autofocus="autofocus"
-                       placeholder="Username">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>:
-                <input type="password"
-                       id="password"
-                       name="password"
-                       class="form-control"
-                       placeholder="Password">
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <input type="submit"
-                               name="login-submit"
-                               id="login-submit"
-                               class="form-control btn btn-info"
-                               value="Log In">
-                    </div>
-                </div>
-            </div>
-            <div>
-                <p>Don't have account? <button th:href="@{/signup}" id="signup">Sign up here</button></p>
-            </div>
+            <table>
+                <tr class="form-group">
+                    <td><label for="username">Username</label></td>
+                    <td><input type="text" id="username" name="username" autofocus="autofocus"></td>
+                </tr>
+                <tr class="form-group">
+                    <td><label for="password">Password</label></td>
+                    <td><input type="password" id="password" name="password"></td>
+                </tr>
+                <tr class="form-group">
+                    <td><input type="submit" name="login-submit" id="login-submit" value="Log In"></td>
+                    <td><p class="pill-blue-button" >Don't have account?<a th:href="@{/signup}">Sign up here</a></p></td>
+                </tr>
+            </table>
         </form>
     </div>
 </div>

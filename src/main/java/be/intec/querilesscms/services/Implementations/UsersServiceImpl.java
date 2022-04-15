@@ -31,9 +31,13 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
         return userRepository.findAll();
     }
 
+    @Override
     public User findByUserName(String userName) {
         return userRepository.findByUsername(userName);
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) { return userRepository.findByEmail(email); }
 
     @Override
     public Optional<User> findUserById(Long id) {
