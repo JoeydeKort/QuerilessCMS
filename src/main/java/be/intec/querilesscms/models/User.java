@@ -25,8 +25,10 @@ public class User {
 
     String lastName;
 
+    @Column(nullable = false, unique = true)
     String username;
 
+    @Column(nullable = false, unique = true)
     String email;
 
     String passCode;

@@ -26,6 +26,7 @@
         <img src="images/QuerilessLogoDark.png" alt="Logo Queriless">
     </div>
     <h1>Registration</h1>
+    <div th:if="${successMessage}" th:utext="${successMessage}"></div>
     <form action="/signup" th:object="${user}" method="POST" enctype="utf8">
         <table>
             <tr>

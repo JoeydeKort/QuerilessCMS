@@ -7,6 +7,7 @@ import be.intec.querilesscms.services.Implementations.UsersServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -14,7 +15,7 @@ import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Validated
 @Controller
 public class SignUpControllerImpl implements SignUpController {
 
@@ -34,29 +35,26 @@ public class SignUpControllerImpl implements SignUpController {
         return "signup";
     }
 
-    //FIXME
     @PostMapping("/signup")
     public String registerUserAccount(@Valid User user,
                                       BindingResult bindingResult,
                                       Model model) {
 
-        // check if user exist
-        // if exist error
         if (usersServiceImpl.findByEmail(user.getEmail()).isPresent()) {
-            bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
+            bindingResult.rejectValue("email","error.user","There is already a user registered with this email.");
         }
 
-        // if not exist save user
-        // success message
-        model.addAttribute("user", new User());
+        if(!bindingResult.hasErrors()) {
 
-        Set<Role> role = new HashSet<>();
-        role.add(Role.user());
-        user.setRoles(role);
+            model.addAttribute("successMessage", "User has been registered successfully");
+            model.addAttribute("user", new User());
 
-        usersServiceImpl.saveUser(user);
+            Set<Role> role = new HashSet<>();
+            role.add(Role.user());
+            user.setRoles(role);
+
+            usersServiceImpl.saveUser(user);
+        }
 
         return "/signup";
 
