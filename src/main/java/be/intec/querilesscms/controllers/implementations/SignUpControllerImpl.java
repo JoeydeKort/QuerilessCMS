@@ -40,6 +40,10 @@ public class SignUpControllerImpl implements SignUpController {
                                       BindingResult bindingResult,
                                       Model model) {
 
+        if (usersServiceImpl.findByUserName(user.getUsername()).isPresent()) {
+            bindingResult.rejectValue("username","error.user","There is already a user registered with this username.");
+        }
+
         if (usersServiceImpl.findByEmail(user.getEmail()).isPresent()) {
             bindingResult.rejectValue("email","error.user","There is already a user registered with this email.");
         }

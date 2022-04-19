@@ -37,10 +37,13 @@ public class UserControllerImpl implements UserController {
             username = principal.toString();
         }
 
-        User user = usersServiceImpl.findByUserName(username);
+        User user = usersServiceImpl.findByUserName(username).get();
+
+        if (usersServiceImpl.findByUserName(username).isPresent()) {
 
         session.setAttribute("user", user);
         model.addAttribute("user", user);
+        }
 
         return "profile";
     }
@@ -63,14 +66,10 @@ public class UserControllerImpl implements UserController {
         return "/login";
     }
 
-    @GetMapping("/admin")
-    public String admin() {
-        return "admin";
-    }
-
     @GetMapping("/dbmenu")
     public String dbmenu() {
-        return "dbmenu";
+
+        return "/dbmenu";
     }
 
 }

@@ -31,7 +31,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     }
 
     @Override
-    public User findByUserName(String userName) {
+    public Optional<User> findByUserName(String userName) {
         return userRepository.findByUsername(userName);
     }
 
@@ -80,12 +80,13 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
 
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
+        User user = userRepository.findByUsername(username).get();
+
+        if (!userRepository.findByUsername(username).isPresent()) {
             throw new UsernameNotFoundException(username);
         }
 
-        Set<Role> roles = new HashSet<Role>();
+        Set<Role> roles = new HashSet<>();
 
         if(user.getRoles() != null && !user.getRoles().isEmpty()) {
 
