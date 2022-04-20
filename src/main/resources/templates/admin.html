@@ -25,6 +25,37 @@
     </div>
 
     <h3>Administrator: [[${#request.remoteUser}]] </h3>
+    <br>
+    <div class="pill-blue-button"><a th:href="@{/addUserForm}" >Add User</a></div>
+
+    <table>
+
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Operation</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="user: ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+            <td th:text="${user.address + ' ' + user.city + ' ' + user.zip}"></td>
+
+            <td>
+                <div class="pill-nav"><a  th:href="@{/showUpdateForm(id=${user.id})}">Update</a></div>
+                <div class="pill-red-button"><a th:href="@{/admin/delete/{id}(id=${user.id})}">Delete</a></div>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
 
 </div>
 
