@@ -49,7 +49,7 @@
             <td th:text="${user.address + ' ' + user.city + ' ' + user.zip}"></td>
 
             <td>
-                <div class="pill-nav"><a  th:href="@{/showUpdateForm(id=${user.id})}">Update</a></div>
+                <div class="pill-nav"><a  th:href="@{/update-user/{id}(id=${user.id})}">Update</a></div>
                 <div class="pill-red-button"><a th:href="@{/admin/delete/{id}(id=${user.id})}">Delete</a></div>
             </td>
         </tr>

@@ -17,4 +17,8 @@ public interface AdminController {
 
     String addNewUser(@Valid User user, BindingResult bindingResult, Model model);
 
+    String showUpdateUserForm(Model model);
+
+    String updateUser(@PathVariable(name = "id") Long id, Model model);
+
 }

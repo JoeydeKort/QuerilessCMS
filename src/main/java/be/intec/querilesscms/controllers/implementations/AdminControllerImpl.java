@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -58,13 +59,14 @@ public class AdminControllerImpl implements AdminController {
     public String addNewUser(@Valid User user, BindingResult bindingResult, Model model) {
 
         if (usersServiceImpl.findByUserName(user.getUsername()).isPresent()) {
-            bindingResult.rejectValue("username","error.user","There is already a user registered with this username.");
+            bindingResult.rejectValue("username", "error.user", "There is already a user registered with this username.");
         }
 
         if (usersServiceImpl.findByEmail(user.getEmail()).isPresent()) {
-            bindingResult.rejectValue("email","error.user","There is already a user registered with this email.");
+            bindingResult.rejectValue("email", "error.user", "There is already a user registered with this email.");
         }
 
+        if (!bindingResult.hasErrors()) {
             model.addAttribute("successMessage", "User has been successfully added.");
             model.addAttribute("user", new User());
 
@@ -73,9 +75,35 @@ public class AdminControllerImpl implements AdminController {
             user.setRoles(role);
 
             usersServiceImpl.saveUser(user);
+        }
 
-
-        return "redirect:/admin";
+        return "admin/adduser";
 
     }
+
+    @Override
+    @GetMapping("/update-user")
+    public String showUpdateUserForm(Model model) {
+
+        model.addAttribute("user", new User());
+
+        return "admin/update-user";
+    }
+
+    //FIXME
+    @Override
+    @RequestMapping ("/update-user/{id}")
+    public String updateUser(@PathVariable(name = "id") Long id, Model model) {
+
+        User user = usersServiceImpl.findUserById(id).get();
+
+        model.addAttribute("user", user);
+        model.addAttribute("successMessage", "User has been successfully updated.");
+
+        usersServiceImpl.saveUser(user);
+
+        return "admin/update-user";
+
+    }
+
 }
