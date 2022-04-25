@@ -66,10 +66,4 @@ public class UserControllerImpl implements UserController {
         return "/login";
     }
 
-    @GetMapping("/dbmenu")
-    public String dbmenu() {
-
-        return "dbmenu/dbmenu";
-    }
-
 }
