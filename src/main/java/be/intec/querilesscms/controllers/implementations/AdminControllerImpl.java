@@ -4,12 +4,19 @@ import be.intec.querilesscms.controllers.interfaces.AdminController;
 import be.intec.querilesscms.models.Role;
 import be.intec.querilesscms.models.User;
 import be.intec.querilesscms.services.Implementations.UsersServiceImpl;
+import be.intec.querilesscms.utils.UserPDFExporter;
+import com.lowagie.text.DocumentException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -79,6 +86,24 @@ public class AdminControllerImpl implements AdminController {
         return "admin/adduser";
 
     }
+
+    @GetMapping("/admin/export/pdf")
+    public void exportUserToPDF(HttpServletResponse response)  throws DocumentException, IOException {
+
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<User> listOfUsers = usersServiceImpl.findAllUsers();
+        UserPDFExporter exporter = new UserPDFExporter(listOfUsers);
+        exporter.export(response);
+
+    }
+
 
     @Override
     @GetMapping("/edit-user/{id}")

@@ -26,7 +26,8 @@
 
     <h3>Administrator: [[${#request.remoteUser}]] </h3>
     <br>
-    <div class="pill-blue-button"><a th:href="@{/adduser}" >Add User</a></div>
+    <div class="pill-blue-button"><a th:href="@{/adduser}" >Add User</a>
+    <a th:href="@{/admin/export/pdf}" >Download PDF file users</a></div>
     <br>
     <table>
 
