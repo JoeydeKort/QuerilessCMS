@@ -24,7 +24,7 @@
         <img src="images/QuerilessLogoDark.png" alt="Logo Queriless">
     </div>
 
-    <h3>Administrator: [[${#request.remoteUser}]] </h3>
+    <h3>Administrator: [[${#request.remoteUser}]]</h3>
     <br>
     <div class="pill-blue-button"><a th:href="@{/adduser}" >Add User</a>
     <a th:href="@{/admin/export/pdf}" >Download PDF file users</a></div>
@@ -37,7 +37,7 @@
             <th>Email</th>
             <th>Name</th>
             <th>Address</th>
-            <th>Operation</th>
+            <th>Operations</th>
         </tr>
         </thead>
 
@@ -51,6 +51,8 @@
 
             <td>
                 <div class="pill-nav"><a  th:href="@{/edit-user/{id}(id=${user.id})}">Update</a></div>
+            </td>
+            <td>
                 <div class="pill-red-button"><a th:href="@{/admin/delete/{id}(id=${user.id})}">Delete</a></div>
             </td>
         </tr>

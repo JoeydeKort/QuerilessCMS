@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DatabaseServiceImpl implements DatabaseService  {
@@ -42,4 +43,50 @@ public class DatabaseServiceImpl implements DatabaseService  {
     public List<Category> findAllCategory() {
         return categoryRepository.findAll();
     }
+
+    @Override
+    public void deleteBeerById(Long id) {
+        beerRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteBrewerById(Long id) {
+        brewerRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteCategoryById(Long id) {
+        categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveBeer(Beer beer) {
+        beerRepository.save(beer);
+    }
+
+    @Override
+    public void saveBrewer(Brewer brewer) {
+        brewerRepository.save(brewer);
+    }
+
+    @Override
+    public void saveCategory(Category category) {
+        categoryRepository.save(category);
+    }
+
+    @Override
+    public Optional<Beer> findBeerByName(String name) {
+        return beerRepository.findByName(name);
+    }
+
+    @Override
+    public Optional<Brewer> findBrewerByName(String name) {
+        return brewerRepository.findByName(name);
+    }
+
+    @Override
+    public Optional<Category> findCategoryByName(String title) {
+        return categoryRepository.findByTitle(title);
+    }
+
 }

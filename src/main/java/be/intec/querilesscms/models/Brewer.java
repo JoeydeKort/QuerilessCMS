@@ -20,6 +20,7 @@ public class Brewer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(nullable = false, unique = true)
     String name;
 
     String city;
