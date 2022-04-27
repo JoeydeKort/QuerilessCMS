@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -179,6 +180,29 @@ public class DatabaseControllerImpl implements DatabaseController  {
 
         return "dbmenu/add-category";
 
+    }
+
+    @RequestMapping(path = {"/search"})
+    public String home(Model model, String keyword) {
+
+        if (keyword != null) {
+            List<Beer> listBeer = databaseServiceImpl.getBeerByKeyword(keyword);
+            model.addAttribute("listBeer", listBeer);
+
+            List<Brewer> listBrewers = databaseServiceImpl.getBrewerByKeyword(keyword);
+            model.addAttribute("listBrewers", listBrewers);
+
+            List<Category> listCategories = databaseServiceImpl.getCategoryByKeyword(keyword);
+            model.addAttribute("listCategories", listCategories);
+
+        } else {
+            return "dbmenu/dbmenu";
+        }
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("pageTitle", "Search result for: ' " + keyword + " '");
+
+        return "dbmenu/search-results";
     }
 
 }

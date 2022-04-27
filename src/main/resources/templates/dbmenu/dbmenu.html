@@ -23,37 +23,37 @@
     <div id="inside-logo">
         <img src="images/QuerilessLogoDark.png" alt="Logo Queriless">
     </div>
-
-    <h3>Username: [[${#request.remoteUser}]] </h3>
-
     <table>
         <tr>
-            <td>Export database to PDF file: </td>
+            <td>Export database to PDF file:</td>
             <td class="pill-nav"><a th:href="@{/dbmenu/export-beer/pdf}"> Beer database </a></td>
             <td class="pill-nav"><a th:href="@{dbmenu/export-brewer/pdf}"> Brewer database </a></td>
             <td class="pill-nav"><a th:href="@{/dbmenu/export-category/pdf}"> Category database </a></td>
         </tr>
         <tr>
-            <td>Create record database: </td>
+            <td>Create record database:</td>
             <td class="pill-nav"><a th:href="@{/add-beer}"> Beer database </a></td>
             <td class="pill-nav"><a th:href="@{/add-brewer}"> Brewer database </a></td>
             <td class="pill-nav"><a th:href="@{/add-category}"> Category database </a></td>
         </tr>
+    </table>
+
+    <table>
         <tr>
-            <td>Update record database: </td>
-            <td class="pill-nav"><a> Beer database </a></td>
-            <td class="pill-nav"><a> Brewer database </a></td>
-            <td class="pill-nav"><a> Category database </a></td>
-        </tr>
-        <tr>
-            <td>Delete record database: </td>
-            <td class="pill-red-button"><a> Beer database </a></td>
-            <td class="pill-red-button"><a> Brewer database </a></td>
-            <td class="pill-red-button"><a> Category database </a></td>
+            <h3>Search in database Beer, Brewer and category to perform operations</h3>
+            <form th:action="@{/search}" method="get">
+                <td><label>
+                    <input type="text" name="keyword" th:value="${keyword}" size="50">
+                </label></td>
+                <td>
+                    <div class="pill-nav">
+                        <button type="submit">Search</button>
+                    </div>
+                </td>
+            </form>
         </tr>
     </table>
 
 </div>
-
 </body>
 </html>

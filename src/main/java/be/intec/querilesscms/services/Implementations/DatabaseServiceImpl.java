@@ -45,6 +45,21 @@ public class DatabaseServiceImpl implements DatabaseService  {
     }
 
     @Override
+    public List<Beer> getBeerByKeyword(String keyword) {
+        return beerRepository.searchBeerDB(keyword);
+    }
+
+    @Override
+    public List<Brewer> getBrewerByKeyword(String keyword) {
+        return brewerRepository.searchBrewerDB(keyword);
+    }
+
+    @Override
+    public List<Category> getCategoryByKeyword(String keyword) {
+        return categoryRepository.searchCategoryDB(keyword);
+    }
+
+    @Override
     public void deleteBeerById(Long id) {
         beerRepository.deleteById(id);
     }

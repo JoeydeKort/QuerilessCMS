@@ -40,6 +40,14 @@ body {
 }
 /* end background */
 
+table {
+    margin-bottom: 20px;
+}
+
+h2 {
+    padding: 25px;
+}
+
 /* Buttons */
 .pill-nav  a {
     background-color: #0b6005;

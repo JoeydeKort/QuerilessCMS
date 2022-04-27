@@ -12,6 +12,9 @@ public interface DatabaseService {
     List<Beer> findAllBeers();
     List<Brewer> findAllBrewers();
     List<Category> findAllCategory();
+    public List<Beer> getBeerByKeyword(String keyword);
+    public List<Brewer> getBrewerByKeyword(String keyword);
+    public List<Category> getCategoryByKeyword(String keyword);
     void deleteBeerById(Long id);
     void deleteBrewerById(Long id);
     void deleteCategoryById(Long id);
