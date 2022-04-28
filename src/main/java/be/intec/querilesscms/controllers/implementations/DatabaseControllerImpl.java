@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -139,7 +140,7 @@ public class DatabaseControllerImpl implements DatabaseController  {
     @PostMapping("/add-brewer")
     public String addNewBrewer(Brewer brewer, BindingResult bindingResult, Model model) {
 
-        if (databaseServiceImpl.findBeerByName(brewer.getName()).isPresent()) {
+        if (databaseServiceImpl.findBrewerByName(brewer.getName()).isPresent()) {
             bindingResult.rejectValue("name", "error.brewer", "There is already a brewer registered with this name.");
         }
 
@@ -167,7 +168,7 @@ public class DatabaseControllerImpl implements DatabaseController  {
     @PostMapping("/add-category")
     public String addNewCategory(Category category, BindingResult bindingResult, Model model) {
 
-        if (databaseServiceImpl.findBeerByName(category.getTitle()).isPresent()) {
+        if (databaseServiceImpl.findCategoryByName(category.getTitle()).isPresent()) {
             bindingResult.rejectValue("title", "error.category", "There is already a category registered with this title.");
         }
 
@@ -195,8 +196,6 @@ public class DatabaseControllerImpl implements DatabaseController  {
             List<Category> listCategories = databaseServiceImpl.getCategoryByKeyword(keyword);
             model.addAttribute("listCategories", listCategories);
 
-        } else {
-            return "dbmenu/dbmenu";
         }
 
         model.addAttribute("keyword", keyword);
@@ -204,5 +203,33 @@ public class DatabaseControllerImpl implements DatabaseController  {
 
         return "dbmenu/search-results";
     }
+
+    @RequestMapping("/search-results/deleteBeer/{id}")
+    public String deleteBeerRecord(@PathVariable Long id) {
+
+        databaseServiceImpl.deleteBeerById(id);
+
+        return "redirect:/dbmenu";
+
+    }
+
+    @RequestMapping("/search-results/deleteBrewer/{id}")
+    public String deleteBrewerRecord(@PathVariable Long id) {
+
+        databaseServiceImpl.deleteBrewerById(id);
+
+        return "redirect:/dbmenu";
+
+    }
+
+    @RequestMapping("/search-results/deleteCategory/{id}")
+    public String deleteCategoryRecord(@PathVariable Long id) {
+
+        databaseServiceImpl.deleteCategoryById(id);
+
+        return "redirect:/dbmenu";
+
+    }
+
 
 }

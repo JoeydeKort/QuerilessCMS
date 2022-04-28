@@ -28,7 +28,6 @@
     <h3>Search results for '[[${keyword}]] '</h3>
 
     <table>
-
         <thead>
         <tr>
             <h2>List of beers</h2>
@@ -54,7 +53,7 @@
                 <div class="pill-nav"><a  th:href="@{/update/{id}(id=${lb.id})}">Update</a></div>
             </td>
             <td>
-                <div class="pill-red-button"><a th:href="@{/delete/{id}(id=${lb.id})}">Delete</a></div>
+                <div class="pill-red-button"><a th:href="@{/search-results/deleteBeer/{id}(id=${lb.id})}">Delete</a></div>
             </td>
         </tr>
         </tbody>
@@ -62,7 +61,6 @@
     </table>
 
     <table>
-
         <thead>
         <tr>
             <h2>List of brewers</h2>
@@ -90,7 +88,7 @@
                 <div class="pill-nav"><a  th:href="@{/update/{id}(id=${lbr.id})}">Update</a></div>
             </td>
             <td>
-                <div class="pill-red-button"><a th:href="@{/delete/{id}(id=${lbr.id})}">Delete</a></div>
+                <div class="pill-red-button"><a th:href="@{/search-results/deleteBrewer/{id}(id=${lbr.id})}">Delete</a></div>
             </td>
         </tr>
         </tbody>
@@ -98,7 +96,6 @@
     </table>
 
     <table>
-
         <thead>
         <tr>
             <h2>List of category</h2>
@@ -121,7 +118,7 @@
                 <div class="pill-nav"><a  th:href="@{/update/{id}(id=${lc.id})}">Update</a></div>
             </td>
             <td>
-                <div class="pill-red-button"><a th:href="@{/delete/{id}(id=${lc.id})}">Delete</a></div>
+                <div class="pill-red-button"><a th:href="@{/search-results/deleteCategory/{id}(id=${lc.id})}">Delete</a></div>
             </td>
         </tr>
         </tbody>
