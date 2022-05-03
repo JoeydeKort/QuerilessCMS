@@ -4,7 +4,6 @@ import be.intec.querilesscms.controllers.interfaces.DatabaseController;
 import be.intec.querilesscms.models.Beer;
 import be.intec.querilesscms.models.Brewer;
 import be.intec.querilesscms.models.Category;
-import be.intec.querilesscms.models.User;
 import be.intec.querilesscms.services.Implementations.DatabaseServiceImpl;
 import be.intec.querilesscms.utils.BeerPDFExporter;
 import be.intec.querilesscms.utils.BrewerPDFExporter;
@@ -13,10 +12,7 @@ import com.lowagie.text.DocumentException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -183,8 +179,9 @@ public class DatabaseControllerImpl implements DatabaseController  {
 
     }
 
+    @Override
     @RequestMapping(path = {"/search"})
-    public String home(Model model, String keyword) {
+    public String search(Model model, String keyword) {
 
         if (keyword != null) {
             List<Beer> listBeer = databaseServiceImpl.getBeerByKeyword(keyword);
@@ -204,6 +201,7 @@ public class DatabaseControllerImpl implements DatabaseController  {
         return "dbmenu/search-results";
     }
 
+    @Override
     @RequestMapping("/search-results/deleteBeer/{id}")
     public String deleteBeerRecord(@PathVariable Long id) {
 
@@ -213,6 +211,7 @@ public class DatabaseControllerImpl implements DatabaseController  {
 
     }
 
+    @Override
     @RequestMapping("/search-results/deleteBrewer/{id}")
     public String deleteBrewerRecord(@PathVariable Long id) {
 
@@ -222,6 +221,7 @@ public class DatabaseControllerImpl implements DatabaseController  {
 
     }
 
+    @Override
     @RequestMapping("/search-results/deleteCategory/{id}")
     public String deleteCategoryRecord(@PathVariable Long id) {
 
@@ -229,6 +229,60 @@ public class DatabaseControllerImpl implements DatabaseController  {
 
         return "redirect:/dbmenu";
 
+    }
+
+    @Override
+    @GetMapping("/edit-beer/{id}")
+    public String showUpdateBeerForm(@PathVariable(name = "id") Long id, Model model) {
+
+        model.addAttribute("beer", databaseServiceImpl.findBeerById(id).get());
+
+        return "dbmenu/update-beer";
+    }
+
+    @Override
+    @RequestMapping ("/update-beer/{id}")
+    public String updateBeer(@ModelAttribute("beer") Beer beer) {
+
+        databaseServiceImpl.saveBeer(beer);
+
+        return "redirect:/dbmenu";
+    }
+
+    @Override
+    @GetMapping("/edit-brewer/{id}")
+    public String showUpdateBrewerForm(@PathVariable(name = "id") Long id, Model model) {
+
+        model.addAttribute("brewer", databaseServiceImpl.findBrewerById(id).get());
+
+        return "dbmenu/update-brewer";
+    }
+
+    @Override
+    @RequestMapping ("/update-brewer/{id}")
+    public String updateBrewer(Brewer brewer) {
+
+        databaseServiceImpl.saveBrewer(brewer);
+
+        return "redirect:/dbmenu";
+    }
+
+    @Override
+    @GetMapping("/edit-category/{id}")
+    public String showUpdateCategoryForm(@PathVariable(name = "id") Long id, Model model) {
+
+        model.addAttribute("category", databaseServiceImpl.findCategoryById(id).get());
+
+        return "dbmenu/update-category";
+    }
+
+    @Override
+    @RequestMapping ("/update-category/{id}")
+    public String updateCategory(Category category) {
+
+        databaseServiceImpl.saveCategory(category);
+
+        return "redirect:/dbmenu";
     }
 
 

@@ -23,7 +23,7 @@
         <img src="images/QuerilessLogoDark.png" alt="Logo Queriless">
     </div>
 
-    <h3>Username: [[${#request.remoteUser}]] </h3>
+    <h2>Username: [[${#request.remoteUser}]] </h2>
     <table id="profileList">
         <tr>
             <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>

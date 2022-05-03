@@ -12,15 +12,23 @@ public interface DatabaseService {
     List<Beer> findAllBeers();
     List<Brewer> findAllBrewers();
     List<Category> findAllCategory();
-    public List<Beer> getBeerByKeyword(String keyword);
-    public List<Brewer> getBrewerByKeyword(String keyword);
-    public List<Category> getCategoryByKeyword(String keyword);
+
+    Optional<Beer> findBeerById(Long id);
+    Optional<Brewer> findBrewerById(Long id);
+    Optional<Category> findCategoryById(Long id);
+
+    List<Beer> getBeerByKeyword(String keyword);
+    List<Brewer> getBrewerByKeyword(String keyword);
+    List<Category> getCategoryByKeyword(String keyword);
+
     void deleteBeerById(Long id);
     void deleteBrewerById(Long id);
     void deleteCategoryById(Long id);
+
     void saveBeer(Beer beer);
     void saveBrewer(Brewer brewer);
     void saveCategory(Category category);
+
     Optional<Beer> findBeerByName(String name);
     Optional<Brewer> findBrewerByName(String name);
     Optional<Category> findCategoryByName(String title);

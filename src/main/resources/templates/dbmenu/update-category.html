@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="icon" type="image/x-icon" href="/images/QuerilessFavicon.png"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>Queriless</title>
+</head>
+<body>
+
+<div class="pill-nav">
+    <span sec:authorize="isAuthenticated()"> | Logged user: <span sec:authentication="name"></span>
+        | <a th:href="@{/logout}">Sign Out</a></span>
+
+    <a th:href="@{/profile}">Profile page</a>
+
+    <a th:href="@{/admin}">Administrator page </a>
+
+    <a th:href="@{/dbmenu}">Database menu </a>
+</div>
+
+
+<div id="main-container">
+    <div id="inside-logo">
+        <img src="/images/QuerilessLogoDark.png" alt="Logo Queriless">
+    </div>
+    <h3>Update beer</h3>
+    <div th:if="${successMessage}" th:utext="${successMessage}"></div>
+    <form th:action="@{/update-category/{id}(id=${category.id})}" th:object="${category}" method="POST" enctype="utf8">
+        <table>
+            <tr>
+                <td><label>id </label></td>
+                <td><label>
+                    <input type="text" th:field="*{id}" readonly="readonly" />
+                </label>
+            </tr>
+            <tr>
+                <td><label>Title </label></td>
+                <td><label>
+                    <input th:field="*{title}"/>
+                </label>
+                    <p th:each="error: ${#fields.errors('title')}"
+                       th:text="${error}">Validation error</p></td>
+            </tr>
+            <tr>
+                <td><label>Slug </label></td>
+                <td><label>
+                    <input th:field="*{slug}"/>
+                </label>
+                    <p th:each="error : ${#fields.errors('slug')}"
+                       th:text="${error}">Validation error</p></td>
+            </tr>
+            <tr>
+                <td><button class="submit" type="submit">submit</button></td>
+                <td><a class="submit" th:href="@{/dbmenu}">Back to database menu</a></td>
+            </tr>
+        </table>
+    </form>
+
+</div>
+
+</body>
+</html>

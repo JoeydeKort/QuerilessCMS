@@ -1,12 +1,15 @@
 package be.intec.querilesscms.controllers.interfaces;
 
 import be.intec.querilesscms.models.User;
+import com.lowagie.text.DocumentException;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 public interface AdminController {
 
@@ -20,6 +23,7 @@ public interface AdminController {
 
     String showUpdateUserForm(@PathVariable(name = "id") Long id, Model model);
 
-    public String updateUser(@ModelAttribute("user") User user);
+    void exportUserToPDF(HttpServletResponse response)  throws DocumentException, IOException;
 
+    String updateUser(@ModelAttribute("user") User user);
 }

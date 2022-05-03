@@ -25,12 +25,10 @@
         <img src="images/QuerilessLogoDark.png" alt="Logo Queriless">
     </div>
 
-    <h3>Search results for '[[${keyword}]] '</h3>
-
     <table>
         <thead>
         <tr>
-            <h2>List of beers</h2>
+            <h2>List of beers with search results for '[[${keyword}]]'</h2>
         </tr>
         <tr>
             <th>Beer id</th>
@@ -50,7 +48,7 @@
             <td th:text="${lb.stock}"></td>
             <td th:text="${lb.price}"></td>
             <td>
-                <div class="pill-nav"><a  th:href="@{/update/{id}(id=${lb.id})}">Update</a></div>
+                <div class="pill-nav"><a  th:href="@{edit-beer/{id}(id=${lb.id})}">Update</a></div>
             </td>
             <td>
                 <div class="pill-red-button"><a th:href="@{/search-results/deleteBeer/{id}(id=${lb.id})}">Delete</a></div>
@@ -63,7 +61,7 @@
     <table>
         <thead>
         <tr>
-            <h2>List of brewers</h2>
+            <h2>List of brewers with search results for '[[${keyword}]]'</h2>
         </tr>
         <tr>
             <th>Brewer id</th>
@@ -85,7 +83,7 @@
             <td th:text="${lbr.city}"></td>
             <td th:text="${lbr.zip}"></td>
             <td>
-                <div class="pill-nav"><a  th:href="@{/update/{id}(id=${lbr.id})}">Update</a></div>
+                <div class="pill-nav"><a  th:href="@{/edit-brewer/{id}(id=${lbr.id})}">Update</a></div>
             </td>
             <td>
                 <div class="pill-red-button"><a th:href="@{/search-results/deleteBrewer/{id}(id=${lbr.id})}">Delete</a></div>
@@ -98,7 +96,7 @@
     <table>
         <thead>
         <tr>
-            <h2>List of category</h2>
+            <h2>List of category with search results for '[[${keyword}]]'</h2>
         </tr>
         <tr>
             <th>Category id</th>
@@ -115,7 +113,7 @@
             <td th:text="${lc.slug}"></td>
 
             <td>
-                <div class="pill-nav"><a  th:href="@{/update/{id}(id=${lc.id})}">Update</a></div>
+                <div class="pill-nav"><a  th:href="@{/edit-category/{id}(id=${lc.id})}">Update</a></div>
             </td>
             <td>
                 <div class="pill-red-button"><a th:href="@{/search-results/deleteCategory/{id}(id=${lc.id})}">Delete</a></div>

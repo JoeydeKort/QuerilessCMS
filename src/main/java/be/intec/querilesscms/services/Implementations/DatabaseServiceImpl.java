@@ -45,6 +45,22 @@ public class DatabaseServiceImpl implements DatabaseService  {
     }
 
     @Override
+    public Optional<Beer> findBeerById(Long id) {
+        return beerRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Brewer> findBrewerById(Long id) {
+        return brewerRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Category> findCategoryById(Long id) {
+        return categoryRepository.findById(id);
+    }
+
+
+    @Override
     public List<Beer> getBeerByKeyword(String keyword) {
         return beerRepository.searchBeerDB(keyword);
     }
@@ -80,9 +96,7 @@ public class DatabaseServiceImpl implements DatabaseService  {
     }
 
     @Override
-    public void saveBrewer(Brewer brewer) {
-        brewerRepository.save(brewer);
-    }
+    public void saveBrewer(Brewer brewer) { brewerRepository.save(brewer); }
 
     @Override
     public void saveCategory(Category category) {
