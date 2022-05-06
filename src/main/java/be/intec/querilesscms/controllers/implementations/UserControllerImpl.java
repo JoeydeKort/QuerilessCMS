@@ -22,6 +22,7 @@ public class UserControllerImpl implements UserController {
         this.usersServiceImpl = usersServiceImpl;
     }
 
+    @Override
     @GetMapping("/profile")
     public String profile(Model model, HttpSession session) {
 
@@ -48,6 +49,7 @@ public class UserControllerImpl implements UserController {
         return "profile";
     }
 
+    @Override
     @RequestMapping ("delete/{id}")
     public String deleteProfile(@PathVariable Long id){
 
@@ -57,6 +59,7 @@ public class UserControllerImpl implements UserController {
 
     }
 
+    @Override
     @GetMapping("/login")
     public String login(Principal principal) {
 

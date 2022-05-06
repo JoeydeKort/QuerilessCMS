@@ -1,6 +1,5 @@
 package be.intec.querilesscms.services.Implementations;
 
-
 import be.intec.querilesscms.models.Beer;
 import be.intec.querilesscms.models.Brewer;
 import be.intec.querilesscms.models.Category;
@@ -20,7 +19,6 @@ public class DatabaseServiceImpl implements DatabaseService  {
     private final BeerRepository beerRepository;
     private final BrewerRepository brewerRepository;
     private final CategoryRepository categoryRepository;
-
 
     public DatabaseServiceImpl(BeerRepository beerRepository, BrewerRepository brewerRepository, CategoryRepository categoryRepository) {
         this.beerRepository = beerRepository;

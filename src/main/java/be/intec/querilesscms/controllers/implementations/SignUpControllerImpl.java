@@ -26,6 +26,7 @@ public class SignUpControllerImpl implements SignUpController {
 
     }
 
+    @Override
     @GetMapping("/signup")
     public String showRegistrationForm(Model model) {
 
@@ -35,6 +36,7 @@ public class SignUpControllerImpl implements SignUpController {
         return "signup";
     }
 
+    @Override
     @PostMapping("/signup")
     public String registerUserAccount(@Valid User user,
                                       BindingResult bindingResult,

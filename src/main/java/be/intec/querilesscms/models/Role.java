@@ -1,6 +1,5 @@
 package be.intec.querilesscms.models;
 
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
@@ -16,13 +14,6 @@ import java.util.List;
 @Data
 @Entity
 public class Role {
-
-    /*
-    USER
-    EDITOR
-    ADMIN
-    GUEST
-     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

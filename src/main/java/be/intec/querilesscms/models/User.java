@@ -1,11 +1,8 @@
 package be.intec.querilesscms.models;
 
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Set;
 
 

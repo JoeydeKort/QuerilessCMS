@@ -58,7 +58,7 @@ public class CategoryPDFExporter {
 
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100f);
-        table.setWidths(new float[] {1.5f, 5.0f, 5.0f,});
+        table.setWidths(new float[] {3.0f, 4.0f, 4.0f,});
         table.setSpacingBefore(10);
 
         writeTableHeader(table);
