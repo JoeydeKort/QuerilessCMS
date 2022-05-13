@@ -17,7 +17,6 @@ import java.util.*;
 public class UsersServiceImpl implements UsersService, UserDetailsService {
 
     private final BCryptPasswordEncoder encoder;
-
     private final UserRepository userRepository;
 
     public UsersServiceImpl(BCryptPasswordEncoder encoder, UserRepository userRepository) {
