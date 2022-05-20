@@ -25,5 +25,7 @@ public interface AdminController {
 
     void exportUserToPDF(HttpServletResponse response)  throws DocumentException, IOException;
 
+    public void exportLogDataToPDF(HttpServletResponse response) throws DocumentException, IOException;
+
     String updateUser(@ModelAttribute("user") User user);
 }

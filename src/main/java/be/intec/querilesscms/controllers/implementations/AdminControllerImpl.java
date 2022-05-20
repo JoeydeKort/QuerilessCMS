@@ -4,6 +4,7 @@ import be.intec.querilesscms.controllers.interfaces.AdminController;
 import be.intec.querilesscms.models.Role;
 import be.intec.querilesscms.models.User;
 import be.intec.querilesscms.services.Implementations.UsersServiceImpl;
+import be.intec.querilesscms.utils.LoggerDataPDFExporter;
 import be.intec.querilesscms.utils.UserPDFExporter;
 import com.lowagie.text.DocumentException;
 import org.slf4j.Logger;
@@ -15,13 +16,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class AdminControllerImpl implements AdminController {
@@ -114,6 +114,42 @@ public class AdminControllerImpl implements AdminController {
         exporter.export(response);
 
         log.info("Admin created PDF File of the users");
+
+    }
+
+    /*
+    This is to get the log data that is stored into a pdf file for the administrator.
+     */
+
+    public List<String> getLogData() throws FileNotFoundException {
+
+        Scanner scanner = new Scanner(new File("src/main/resources/application-log.log"));
+        ArrayList<String> resultLoggerDataList = new ArrayList<>();
+
+        while (scanner.hasNextLine()) {
+            resultLoggerDataList.add(scanner.nextLine());
+        }
+
+        return resultLoggerDataList;
+    }
+
+    @Override
+    @GetMapping("/admin/export-logdata/pdf")
+    public void exportLogDataToPDF(HttpServletResponse response) throws DocumentException, IOException {
+
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=logdata_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<String> listOfLogData = getLogData();
+        LoggerDataPDFExporter exporter = new LoggerDataPDFExporter(listOfLogData);
+        exporter.export(response);
+
+        log.info("Admin created PDF File of the log data");
 
     }
 
