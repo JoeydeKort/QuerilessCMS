@@ -4,6 +4,8 @@ import be.intec.querilesscms.controllers.interfaces.UserController;
 import be.intec.querilesscms.models.Role;
 import be.intec.querilesscms.models.User;
 import be.intec.querilesscms.services.Implementations.UsersServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ import java.util.Set;
 public class UserControllerImpl implements UserController {
 
     private final UsersServiceImpl usersServiceImpl;
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public UserControllerImpl(UsersServiceImpl usersServiceImpl) {
         this.usersServiceImpl = usersServiceImpl;
@@ -50,6 +54,8 @@ public class UserControllerImpl implements UserController {
 
         session.setAttribute("user", user);
         model.addAttribute("user", user);
+
+        log.info("Accessed profile page with username: " + user + " || " + user.getRoles());
         }
 
         return "profile";
@@ -61,6 +67,8 @@ public class UserControllerImpl implements UserController {
 
         usersServiceImpl.deleteById(id);
 
+        log.info("Deleted profile with user ID: " + id);
+
         return "redirect:/login";
 
     }
@@ -69,15 +77,8 @@ public class UserControllerImpl implements UserController {
     @GetMapping("/login")
     public String login(Principal principal) {
 
-        if (principal != null) {
-            return "redirect:/login";
-        }
         return "/login";
     }
-
-    /*
-    Signup part for the users.
-     */
 
     @Override
     @GetMapping("/signup")
@@ -113,6 +114,8 @@ public class UserControllerImpl implements UserController {
             user.setRoles(role);
 
             usersServiceImpl.saveUser(user);
+
+            log.info("New user signed up with user ID: " + user.getId() + " || Username: " + user);
         }
 
         return "/signup";

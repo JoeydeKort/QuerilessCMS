@@ -9,6 +9,8 @@ import be.intec.querilesscms.utils.BeerPDFExporter;
 import be.intec.querilesscms.utils.BrewerPDFExporter;
 import be.intec.querilesscms.utils.CategoryPDFExporter;
 import com.lowagie.text.DocumentException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +27,8 @@ import java.util.List;
 @Controller
 public class DatabaseControllerImpl implements DatabaseController  {
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     private final DatabaseServiceImpl databaseServiceImpl;
 
     public DatabaseControllerImpl(DatabaseServiceImpl databaseServiceImpl) {
@@ -34,6 +38,8 @@ public class DatabaseControllerImpl implements DatabaseController  {
     @Override
     @GetMapping("/dbmenu")
     public String showDbmenu() {
+
+        log.info("Accessed database menu");
 
         return "dbmenu/dbmenu";
 
@@ -55,11 +61,13 @@ public class DatabaseControllerImpl implements DatabaseController  {
         BeerPDFExporter exporter = new BeerPDFExporter(listOfBeers);
         exporter.export(response);
 
+        log.info("PDF File created of the Beer database");
+
     }
 
     @Override
     @GetMapping("/dbmenu/export-brewer/pdf")
-    public void exportBrewerToPDF(HttpServletResponse response)  throws DocumentException, IOException {
+    public void exportBrewerToPDF(HttpServletResponse response) throws DocumentException, IOException {
 
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -73,11 +81,13 @@ public class DatabaseControllerImpl implements DatabaseController  {
         BrewerPDFExporter exporter = new BrewerPDFExporter(listOfBrewers);
         exporter.export(response);
 
+        log.info("PDF File created of the Brewer database");
+
     }
 
     @Override
     @GetMapping("/dbmenu/export-category/pdf")
-    public void exportCategoryToPDF(HttpServletResponse response)  throws DocumentException, IOException {
+    public void exportCategoryToPDF(HttpServletResponse response) throws DocumentException, IOException {
 
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -90,6 +100,8 @@ public class DatabaseControllerImpl implements DatabaseController  {
         List<Category> listOfCategories = databaseServiceImpl.findAllCategory();
         CategoryPDFExporter exporter = new CategoryPDFExporter(listOfCategories);
         exporter.export(response);
+
+        log.info("PDF File created of the Category database");
 
     }
 
@@ -116,6 +128,9 @@ public class DatabaseControllerImpl implements DatabaseController  {
             model.addAttribute("beer", new Beer());
 
             databaseServiceImpl.saveBeer(beer);
+
+            log.info("New Beer record created in database: " + beer);
+
         }
 
         return "dbmenu/add-beer";
@@ -145,6 +160,9 @@ public class DatabaseControllerImpl implements DatabaseController  {
             model.addAttribute("brewer", new Brewer());
 
             databaseServiceImpl.saveBrewer(brewer);
+
+            log.info("New Brewer record created in database: " + brewer);
+
         }
 
         return "dbmenu/add-brewer";
@@ -173,6 +191,9 @@ public class DatabaseControllerImpl implements DatabaseController  {
             model.addAttribute("category", new Category());
 
             databaseServiceImpl.saveCategory(category);
+
+            log.info("New Category record created in database: " + category);
+
         }
 
         return "dbmenu/add-category";
@@ -198,6 +219,8 @@ public class DatabaseControllerImpl implements DatabaseController  {
         model.addAttribute("keyword", keyword);
         model.addAttribute("pageTitle", "Search result for: ' " + keyword + " '");
 
+        log.info("Search is made with keyword: " + keyword);
+
         return "dbmenu/search-results";
     }
 
@@ -206,6 +229,8 @@ public class DatabaseControllerImpl implements DatabaseController  {
     public String deleteBeerRecord(@PathVariable Long id) {
 
         databaseServiceImpl.deleteBeerById(id);
+
+        log.info("Beer record with beer-ID: " + id + " is deleted");
 
         return "redirect:/dbmenu";
 
@@ -217,6 +242,8 @@ public class DatabaseControllerImpl implements DatabaseController  {
 
         databaseServiceImpl.deleteBrewerById(id);
 
+        log.info("Brewer record with brewer-ID: " + id + " is deleted");
+
         return "redirect:/dbmenu";
 
     }
@@ -226,6 +253,8 @@ public class DatabaseControllerImpl implements DatabaseController  {
     public String deleteCategoryRecord(@PathVariable Long id) {
 
         databaseServiceImpl.deleteCategoryById(id);
+
+        log.info("Category record with category-ID: " + id + " is deleted");
 
         return "redirect:/dbmenu";
 
@@ -241,10 +270,12 @@ public class DatabaseControllerImpl implements DatabaseController  {
     }
 
     @Override
-    @RequestMapping ("/update-beer/{id}")
+    @RequestMapping("/update-beer/{id}")
     public String updateBeer(@ModelAttribute("beer") Beer beer) {
 
         databaseServiceImpl.saveBeer(beer);
+
+        log.info("Beer record: " + beer + " is updated");
 
         return "redirect:/dbmenu";
     }
@@ -259,10 +290,12 @@ public class DatabaseControllerImpl implements DatabaseController  {
     }
 
     @Override
-    @RequestMapping ("/update-brewer/{id}")
+    @RequestMapping("/update-brewer/{id}")
     public String updateBrewer(Brewer brewer) {
 
         databaseServiceImpl.saveBrewer(brewer);
+
+        log.info("Brewer record: " + brewer + " is updated");
 
         return "redirect:/dbmenu";
     }
@@ -277,13 +310,14 @@ public class DatabaseControllerImpl implements DatabaseController  {
     }
 
     @Override
-    @RequestMapping ("/update-category/{id}")
+    @RequestMapping("/update-category/{id}")
     public String updateCategory(Category category) {
 
         databaseServiceImpl.saveCategory(category);
 
+        log.info("Category record: " + category + " is updated");
+
         return "redirect:/dbmenu";
     }
-
 
 }

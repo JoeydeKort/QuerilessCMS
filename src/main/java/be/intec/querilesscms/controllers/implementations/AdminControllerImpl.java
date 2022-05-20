@@ -6,6 +6,8 @@ import be.intec.querilesscms.models.User;
 import be.intec.querilesscms.services.Implementations.UsersServiceImpl;
 import be.intec.querilesscms.utils.UserPDFExporter;
 import com.lowagie.text.DocumentException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +28,8 @@ public class AdminControllerImpl implements AdminController {
 
     private final UsersServiceImpl usersServiceImpl;
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     public AdminControllerImpl(UsersServiceImpl usersServiceImpl) {
         this.usersServiceImpl = usersServiceImpl;
     }
@@ -37,6 +41,8 @@ public class AdminControllerImpl implements AdminController {
         List<User> users = usersServiceImpl.findAllUsers();
         model.addAttribute("users", users);
 
+        log.info("Admin accessed administrator page");
+
         return "admin/admin";
     }
 
@@ -45,6 +51,8 @@ public class AdminControllerImpl implements AdminController {
     public String deleteUser(@PathVariable Long id) {
 
         usersServiceImpl.deleteById(id);
+
+        log.info("Admin deleted user with user-ID: " + id);
 
         return "redirect:/admin";
 
@@ -81,6 +89,8 @@ public class AdminControllerImpl implements AdminController {
             user.setRoles(role);
 
             usersServiceImpl.saveUser(user);
+
+            log.info("Admin added new user with user ID: " + user.getId() + " || Username: " + user);
         }
 
         return "admin/adduser";
@@ -89,7 +99,7 @@ public class AdminControllerImpl implements AdminController {
 
     @Override
     @GetMapping("/admin/export/pdf")
-    public void exportUserToPDF(HttpServletResponse response)  throws DocumentException, IOException {
+    public void exportUserToPDF(HttpServletResponse response) throws DocumentException, IOException {
 
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -103,6 +113,8 @@ public class AdminControllerImpl implements AdminController {
         UserPDFExporter exporter = new UserPDFExporter(listOfUsers);
         exporter.export(response);
 
+        log.info("Admin created PDF File of the users");
+
     }
 
     @Override
@@ -115,15 +127,15 @@ public class AdminControllerImpl implements AdminController {
     }
 
     @Override
-    @RequestMapping ("/update-user/{id}")
+    @RequestMapping("/update-user/{id}")
     public String updateUser(@ModelAttribute("user") User user) {
 
         usersServiceImpl.saveUser(user);
 
+        log.info("Admin updated user: " + user);
+
         return "redirect:/admin";
 
     }
-
-
 
 }
