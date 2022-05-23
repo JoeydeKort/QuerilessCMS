@@ -3,6 +3,7 @@ package be.intec.querilesscms.controllers.implementations;
 import be.intec.querilesscms.controllers.interfaces.AdminController;
 import be.intec.querilesscms.models.Role;
 import be.intec.querilesscms.models.User;
+import be.intec.querilesscms.services.Implementations.DatabaseServiceImpl;
 import be.intec.querilesscms.services.Implementations.UsersServiceImpl;
 import be.intec.querilesscms.utils.LoggerDataPDFExporter;
 import be.intec.querilesscms.utils.UserPDFExporter;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,11 +26,13 @@ import java.util.*;
 public class AdminControllerImpl implements AdminController {
 
     private final UsersServiceImpl usersServiceImpl;
+    private final DatabaseServiceImpl databaseServiceImpl;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public AdminControllerImpl(UsersServiceImpl usersServiceImpl) {
+    public AdminControllerImpl(UsersServiceImpl usersServiceImpl, DatabaseServiceImpl databaseServiceImpl) {
         this.usersServiceImpl = usersServiceImpl;
+        this.databaseServiceImpl = databaseServiceImpl;
     }
 
     @Override
@@ -117,22 +118,6 @@ public class AdminControllerImpl implements AdminController {
 
     }
 
-    /*
-    This is to get the log data that is stored into a pdf file for the administrator.
-     */
-
-    public List<String> getLogData() throws FileNotFoundException {
-
-        Scanner scanner = new Scanner(new File("src/main/resources/application-log.log"));
-        ArrayList<String> resultLoggerDataList = new ArrayList<>();
-
-        while (scanner.hasNextLine()) {
-            resultLoggerDataList.add(scanner.nextLine());
-        }
-
-        return resultLoggerDataList;
-    }
-
     @Override
     @GetMapping("/admin/export-logdata/pdf")
     public void exportLogDataToPDF(HttpServletResponse response) throws DocumentException, IOException {
@@ -145,7 +130,7 @@ public class AdminControllerImpl implements AdminController {
         String headerValue = "attachment; filename=logdata_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
 
-        List<String> listOfLogData = getLogData();
+        List<String> listOfLogData = databaseServiceImpl.getLogData();
         LoggerDataPDFExporter exporter = new LoggerDataPDFExporter(listOfLogData);
         exporter.export(response);
 

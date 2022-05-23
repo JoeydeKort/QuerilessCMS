@@ -4,6 +4,7 @@ import be.intec.querilesscms.models.Beer;
 import be.intec.querilesscms.models.Brewer;
 import be.intec.querilesscms.models.Category;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,4 +33,6 @@ public interface DatabaseService {
     Optional<Beer> findBeerByName(String name);
     Optional<Brewer> findBrewerByName(String name);
     Optional<Category> findCategoryByName(String title);
+
+    List<String> getLogData() throws FileNotFoundException;
 }

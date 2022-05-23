@@ -10,8 +10,12 @@ import be.intec.querilesscms.services.interfaces.DatabaseService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 @Service
 public class DatabaseServiceImpl implements DatabaseService  {
@@ -114,6 +118,19 @@ public class DatabaseServiceImpl implements DatabaseService  {
     @Override
     public Optional<Category> findCategoryByName(String title) {
         return categoryRepository.findByTitle(title);
+    }
+
+    @Override
+    public List<String> getLogData() throws FileNotFoundException {
+
+        Scanner scanner = new Scanner(new File("src/main/resources/application-log.log"));
+        ArrayList<String> resultLoggerDataList = new ArrayList<>();
+
+        while (scanner.hasNextLine()) {
+            resultLoggerDataList.add(scanner.nextLine());
+        }
+
+        return resultLoggerDataList;
     }
 
 }
