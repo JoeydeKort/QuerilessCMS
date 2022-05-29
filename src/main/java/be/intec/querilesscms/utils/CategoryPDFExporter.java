@@ -22,7 +22,7 @@ public class CategoryPDFExporter {
 
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.BLUE);
+        cell.setBackgroundColor(Color.LIGHT_GRAY);
         cell.setPadding(3);
 
         cell.setPhrase(new Phrase("Category ID"));

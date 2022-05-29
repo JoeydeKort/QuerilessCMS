@@ -21,7 +21,7 @@ public class UserPDFExporter {
 
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.BLUE);
+        cell.setBackgroundColor(Color.LIGHT_GRAY);
         cell.setPadding(8);
 
         cell.setPhrase(new Phrase("User ID"));

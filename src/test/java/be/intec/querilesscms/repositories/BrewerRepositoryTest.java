@@ -3,6 +3,7 @@ package be.intec.querilesscms.repositories;
 import be.intec.querilesscms.models.Brewer;
 import be.intec.querilesscms.models.BrewerMock;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -27,6 +28,7 @@ class BrewerRepositoryTest {
     }
 
     @Test
+    @DisplayName("Testing succes scenario finding Brewer by name ")
     void itShouldSuccessfullyFindBrewerByName() {
 
         Brewer brewer = new BrewerMock();
@@ -39,6 +41,7 @@ class BrewerRepositoryTest {
     }
 
     @Test
+    @DisplayName("Testing fail scenario finding Brewer by name ")
     void itShouldFailFindBrewerByName() {
 
         Brewer brewer = new BrewerMock();
@@ -51,6 +54,7 @@ class BrewerRepositoryTest {
     }
 
     @Test
+    @DisplayName("Testing succes scenario search method Brewer")
     void itShouldSuccessfullySearchBrewerDB() {
 
         Brewer brewer01 = new Brewer();
@@ -76,6 +80,7 @@ class BrewerRepositoryTest {
     }
 
     @Test
+    @DisplayName("Testing fail scenario search method Brewer")
     void itShouldFailSearchBrewerDB() {
 
         Brewer brewer01 = new Brewer();

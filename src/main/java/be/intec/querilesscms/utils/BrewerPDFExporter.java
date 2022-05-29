@@ -21,7 +21,7 @@ public class BrewerPDFExporter {
 
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.BLUE);
+        cell.setBackgroundColor(Color.LIGHT_GRAY);
         cell.setPadding(6);
 
         cell.setPhrase(new Phrase("Brewer ID"));

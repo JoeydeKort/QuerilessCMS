@@ -21,7 +21,7 @@ public class LoggerDataPDFExporter {
 
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.BLUE);
+        cell.setBackgroundColor(Color.LIGHT_GRAY);
         cell.setPadding(1);
 
         cell.setPhrase(new Phrase("Log Data"));

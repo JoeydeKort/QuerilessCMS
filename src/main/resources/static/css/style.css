@@ -7,6 +7,7 @@
 
 /*background gradient animation is made with the CSS Gradient Animator by Ian Forrest */
 body {
+    font-family: nunito, sans-serif;
     background: linear-gradient(316deg, #24f316, #0d0d0d, #000000, #080606);
     background-size: 800% 800%;
 
@@ -90,6 +91,7 @@ button:hover {
 }
 
 .submit {
+    font-family: nunito, sans-serif;
     background-color: #0b6005;
     display: inline-block;
     color: #0d0d0d;
@@ -147,6 +149,7 @@ button:hover {
 }
 
 #login-submit {
+    font-family: nunito, sans-serif;
     background-color: #0b6005;
     display: inline-block;
     color: #0d0d0d;
@@ -196,6 +199,11 @@ img {
 
 .form-group {
     margin: 10px;
+}
+
+th {
+    text-align: center;
+    padding: 5px;
 }
 
 td {

@@ -16,5 +16,4 @@ public class QuerilessCmsApplication {
     public static void main(String[] args) {
         SpringApplication.run(QuerilessCmsApplication.class, args);
     }
-
 }
