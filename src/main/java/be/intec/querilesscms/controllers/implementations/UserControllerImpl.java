@@ -124,7 +124,6 @@ public class UserControllerImpl implements UserController {
                     "Here is your account information: " + '\n' +
                             "Username: " + user.getUsername() + '\n' +
                             "Email address: " + user.getEmail() + '\n' +
-                            "Password: " + "For password information contact the administrator" + '\n' +
                             "First name: " + user.getFirstName() + '\n' +
                             "Last name: " + user.getLastName() + '\n' +
                             "Address: " + user.getAddress() + " " + user.getCity() + " " + user.getZip() + '\n' +
