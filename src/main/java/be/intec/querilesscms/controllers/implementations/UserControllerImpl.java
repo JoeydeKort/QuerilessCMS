@@ -127,7 +127,8 @@ public class UserControllerImpl implements UserController {
                             "First name: " + user.getFirstName() + '\n' +
                             "Last name: " + user.getLastName() + '\n' +
                             "Address: " + user.getAddress() + " " + user.getCity() + " " + user.getZip() + '\n' +
-                            "Thank you for joining Queriless! ");
+                            "Thank you for joining Queriless! " + '\n' +
+                            "Log in on Queriless here -> " + " http://localhost:7777/login");
 
             log.info("New user signed up with user ID: " + user.getId() + " || Username: " + user);
 
