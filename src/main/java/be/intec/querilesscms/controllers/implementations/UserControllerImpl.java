@@ -130,6 +130,7 @@ public class UserControllerImpl implements UserController {
                             "Thank you for joining Queriless! ");
 
             log.info("New user signed up with user ID: " + user.getId() + " || Username: " + user);
+
         }
 
         return "/signup";
