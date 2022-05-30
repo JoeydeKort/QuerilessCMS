@@ -29,4 +29,4 @@ When you start the application you first need to login. There are 3 levels of au
 - Editor: Can create, read and update.
 - User: Is able to read. 
 
-All security levels are able to create PDF files based on the database. Only the administrator can see and create a PDF file of the users table. Furthermore, the search function in the database menu will give you all search results based on a keyword and will list these on a page for you. 
+All security levels are able to create PDF files based on the database. Only the administrator can see and create a PDF file of the users table. 
