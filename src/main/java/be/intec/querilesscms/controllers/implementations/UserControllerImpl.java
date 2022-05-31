@@ -131,6 +131,7 @@ public class UserControllerImpl implements UserController {
                             "Log in on Queriless here -> " + " http://localhost:7777/login");
 
             log.info("New user signed up with user ID: " + user.getId() + " || Username: " + user);
+            log.info("New user signed up and mail is send to: " + user);
 
         }
 

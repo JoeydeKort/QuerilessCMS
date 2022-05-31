@@ -4,6 +4,7 @@ import be.intec.querilesscms.controllers.interfaces.AdminController;
 import be.intec.querilesscms.models.Role;
 import be.intec.querilesscms.models.User;
 import be.intec.querilesscms.services.Implementations.DatabaseServiceImpl;
+import be.intec.querilesscms.services.Implementations.EmailServiceImpl;
 import be.intec.querilesscms.services.Implementations.UsersServiceImpl;
 import be.intec.querilesscms.utils.LoggerDataPDFExporter;
 import be.intec.querilesscms.utils.UserPDFExporter;
@@ -27,12 +28,14 @@ public class AdminControllerImpl implements AdminController {
 
     private final UsersServiceImpl usersServiceImpl;
     private final DatabaseServiceImpl databaseServiceImpl;
+    private final EmailServiceImpl emailServiceImpl;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public AdminControllerImpl(UsersServiceImpl usersServiceImpl, DatabaseServiceImpl databaseServiceImpl) {
+    public AdminControllerImpl(UsersServiceImpl usersServiceImpl, DatabaseServiceImpl databaseServiceImpl, EmailServiceImpl emailServiceImpl) {
         this.usersServiceImpl = usersServiceImpl;
         this.databaseServiceImpl = databaseServiceImpl;
+        this.emailServiceImpl = emailServiceImpl;
     }
 
     @Override
@@ -91,7 +94,21 @@ public class AdminControllerImpl implements AdminController {
 
             usersServiceImpl.saveUser(user);
 
+            this.emailServiceImpl.sendMessage(
+                    user.getEmail(),
+                    "Welcome to Queriless!",
+                    "Here is your account information: " + '\n' +
+                            "Username: " + user.getUsername() + '\n' +
+                            "Email address: " + user.getEmail() + '\n' +
+                            "First name: " + user.getFirstName() + '\n' +
+                            "Last name: " + user.getLastName() + '\n' +
+                            "Address: " + user.getAddress() + " " + user.getCity() + " " + user.getZip() + '\n' +
+                            "Thank you for joining Queriless! " + '\n' +
+                            "Log in on Queriless here -> " + " http://localhost:7777/login");
+
             log.info("Admin added new user with user ID: " + user.getId() + " || Username: " + user);
+            log.info("Admin added a new user and mail is send to: " + user);
+
         }
 
         return "admin/adduser";
@@ -153,7 +170,19 @@ public class AdminControllerImpl implements AdminController {
 
         usersServiceImpl.saveUser(user);
 
+        this.emailServiceImpl.sendMessage(
+                user.getEmail(),
+                "Contact information updated",
+                "Here is your new account information: " + '\n' +
+                        "Username: " + user.getUsername() + '\n' +
+                        "Email address: " + user.getEmail() + '\n' +
+                        "First name: " + user.getFirstName() + '\n' +
+                        "Last name: " + user.getLastName() + '\n' +
+                        "Address: " + user.getAddress() + " " + user.getCity() + " " + user.getZip() + '\n' +
+                        "Log in on Queriless here -> " + " http://localhost:7777/login");
+
         log.info("Admin updated user: " + user);
+        log.info("Admin updated user and mail is send to: " + user);
 
         return "redirect:/admin";
 
