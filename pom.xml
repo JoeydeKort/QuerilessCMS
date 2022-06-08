@@ -12,7 +12,7 @@
 
     <groupId>be.intec</groupId>
     <artifactId>querilesscms</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>latest</version>
     <name>querilesscms</name>
     <description>querilesscms</description>
 
@@ -104,6 +104,9 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <image>
+                        <name>dockerio/joeydekort/${project.artifactId}</name>
+                    </image>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,0 +1,14 @@
+2022-06-02 16:43:48 [main] INFO  b.i.q.QuerilessCmsApplication - Starting QuerilessCmsApplication using Java 11.0.15 on DESKTOP-LLN74AU with PID 22884 (C:\Users\jjtde\Desktop\Projects\Java\QuerilessCMS\QuerilessCMS\target\classes started by jjtde in C:\Users\jjtde\Desktop\Projects\Java\QuerilessCMS\QuerilessCMS)
+2022-06-02 16:43:48 [main] INFO  b.i.q.QuerilessCmsApplication - No active profile set, falling back to 1 default profile: "default"
+2022-06-02 16:43:57 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-06-02 16:43:59 [main] INFO  b.i.q.QuerilessCmsApplication - Started QuerilessCmsApplication in 11.447 seconds (JVM running for 15.336)
+2022-06-02 16:44:30 [http-nio-7777-exec-5] WARN  o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [239] milliseconds.
+2022-06-02 16:44:30 [http-nio-7777-exec-6] INFO  b.i.q.c.i.UserControllerImpl - Accessed profile page with username: niki || [ROLE_ADMIN]
+2022-06-02 16:44:32 [http-nio-7777-exec-10] INFO  b.i.q.c.i.AdminControllerImpl - Admin accessed administrator page
+2022-06-02 16:44:34 [http-nio-7777-exec-4] INFO  b.i.q.c.i.AdminControllerImpl - Admin deleted user with user-ID: 3
+2022-06-02 16:44:34 [http-nio-7777-exec-5] INFO  b.i.q.c.i.AdminControllerImpl - Admin accessed administrator page
+2022-06-02 16:44:35 [http-nio-7777-exec-9] INFO  b.i.q.c.i.DatabaseControllerImpl - Accessed database menu
+2022-06-02 16:44:38 [http-nio-7777-exec-2] INFO  b.i.q.c.i.DatabaseControllerImpl - Search is made with keyword: 
+2022-06-02 16:44:40 [http-nio-7777-exec-6] INFO  b.i.q.c.i.DatabaseControllerImpl - Category record with category-ID: 3 is deleted
+2022-06-02 16:44:40 [http-nio-7777-exec-7] INFO  b.i.q.c.i.DatabaseControllerImpl - Accessed database menu
+2022-06-02 16:44:42 [http-nio-7777-exec-1] INFO  b.i.q.c.i.DatabaseControllerImpl - Search is made with keyword: 

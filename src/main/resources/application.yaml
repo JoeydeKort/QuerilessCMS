@@ -1,0 +1,79 @@
+server:
+  port: ${PORT:7777}
+
+  #  TO ENABLE CUSTOM ERROR PAGES
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        search:
+          backend:
+            directory:
+              type: local-heap
+
+  data:
+    jpa:
+      repositories:
+        enabled: true
+
+  # TO ENABLE CUSTOM BANNER
+  banner:
+    location: classpath:banner.txt
+
+  # DATABASE INTEC
+  #  datasource:
+  #    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://db.intecbrussel.be:33100/student01?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true}
+  #    username: ${SPRING_DATASOURCE_USERNAME}
+  #    password: ${SPRING_DATASOURCE_PASSWORD}
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #    initialization-mode: always
+
+  # LOCAL DATABASE
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/student01?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:P@ssw0rd}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+
+  security:
+    user:
+      name: ${SPRING_SECURITY_USERNAME}
+      password: ${SPRING_SECURITY_PASSWORD}
+      roles: ${SPRING_SECURITY_ROLES}
+
+  application:
+    name: Queriless
+
+  # THESE SETTINGS ARE TO ENABLE EMAIL SERVICE
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
+
+
+# LOG REQUEST AND RESPONS DATA
+logging:
+  level:
+    root: WARN
+    be.intec.querilesscms: INFO
+  file:
+    name: src/main/resources/application-log.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
