@@ -12,13 +12,14 @@
 
     <groupId>be.intec</groupId>
     <artifactId>querilesscms</artifactId>
-    <version>latest</version>
+    <version>dev</version>
     <name>querilesscms</name>
     <description>querilesscms</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <spring-boot.build-image.imageName>joeydekort/docker-queriless</spring-boot.build-image.imageName>
     </properties>
 
     <dependencies>
@@ -104,9 +105,6 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <image>
-                        <name>dockerio/joeydekort/${project.artifactId}</name>
-                    </image>
                 </configuration>
             </plugin>
         </plugins>

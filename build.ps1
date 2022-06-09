@@ -1,1 +1,1 @@
-mvn spring-boot:build-image
+mvn clean install spring-boot:build-image

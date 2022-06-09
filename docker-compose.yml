@@ -1,89 +1,49 @@
 version: "3.9"
 services:
 
-  joey_dev_appserver:
-    image: joeydekort/docker-queriless:dev
-    ports:
-      - "8888:7777"
-    restart: on-failure
-    depends_on:
-      - joey_dev_database_server
-    environment:
-      - SPRING_DATASOURCE_URL:jdbc:mysql://joey_dev_database_server:5432/student01dev
-      - SPRING_DATASOURCE_USERNAME:root
-      - SPRING_DATASOURCE_PASSWORD:P@ssw0rd
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
-    networks:
-      - joey_development_network
-    volumes:
-      - joey_application_volume:/var/lib/joey
-
-  joey_prod_appserver:
-    image: joeydekort/docker-queriless
-    ports:
-      - "7777:7777"
-    depends_on:
-      - joey_prod_database_server
-    restart: on-failure
-    environment:
-      - SPRING_DATASOURCE_URL:jdbc:mysql://joey_prod_database_server:5432/student01
-      - SPRING_DATASOURCE_USERNAME:root
-      - SPRING_DATASOURCE_PASSWORD:P@ssw0rd
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
-    networks:
-      - joey_development_network
-    volumes:
-      - joey_application_volume:/var/lib/joey
-
-  joey_prod_database_server:
+  queriless_db_server:
+    container_name: queriless_db_server
     image: mysql:latest
-    ports:
-      - "5432:5432"
-    environment:
-      - MYSQL_PASSWORD:P@ssw0rd
-      - MYSQL_USER:root
-      - MYSQL_DATABASE=student01
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U mysql" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    restart: unless-stopped
     networks:
-      - joey_development_network
-    volumes:
-      - joey_database_volume:/var/lib/mysql
-
-  joey_dev_database_server:
-    image: mysql:latest
+      - queriless_net
     ports:
-      - "2345:5432"
+      - "3999:3306"
     environment:
-      - MYSQL_PASSWORD:P@ssw0rd
-      - MYSQL_USER:root
       - MYSQL_DATABASE=student01dev
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U mysql" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - joey_development_network
-    volumes:
-      - joey_database_volume:/var/lib/mysql
+      - MYSQL_USER=queriless
+      - MYSQL_PASSWORD=queriless
+      - MYSQL_ROOT_PASSWORD=P@ssw0rd
 
-  joey_dev_database_admin:
-    image: adminer:latest
+  queriless_db_admin:
+    container_name: queriless_db_admin
+    image: adminer
     restart: always
-    ports:
-      - "9090:7777"
+    links:
+      - "queriless_db_server:queriless_db_server"
+    depends_on:
+      - "queriless_db_server"
     networks:
-      - joey_development_network
+      - queriless_net
+    ports:
+      - "1999:8080"
+
+  queriless_app:
+    container_name: queriless_app
+    image: joeydekort/docker-queriless
+    restart: always
+    links:
+      - "queriless_db_server:queriless_db_server"
+    depends_on:
+      - "queriless_db_server"
+    networks:
+      - queriless_net
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://queriless_db_server:3306/student01dev?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: P@ssw0rd
+    ports:
+      - "7777:8080"
 
 networks:
-  joey_production_network:
-  joey_development_network:
-
-
-volumes:
-  joey_database_volume: {}
-  joey_application_volume: {}
+  queriless_net:
