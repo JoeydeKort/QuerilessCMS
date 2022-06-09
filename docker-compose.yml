@@ -10,7 +10,7 @@ services:
     ports:
       - "3999:3306"
     environment:
-      - MYSQL_DATABASE=student01dev
+      - MYSQL_DATABASE=student01
       - MYSQL_USER=queriless
       - MYSQL_PASSWORD=queriless
       - MYSQL_ROOT_PASSWORD=P@ssw0rd
@@ -39,7 +39,7 @@ services:
     networks:
       - queriless_net
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://queriless_db_server:3306/student01dev?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/student01
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: P@ssw0rd
     ports:
